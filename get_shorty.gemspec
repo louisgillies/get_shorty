@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
      "lib/providers/bitly/config.rb",
      "lib/providers/bitly/response.rb",
      "lib/providers/init.rb",
+     "pkg/get_shorty-0.2.0.gem",
      "spec/active_record_helper.rb",
      "spec/bitly/client_spec.rb",
      "spec/bitly/config_spec.rb",
