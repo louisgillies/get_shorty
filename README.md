@@ -10,28 +10,67 @@ A plugin for rails that shortens a url using the bitly shortening service and pe
 ### As a rails plugin
   script/plugin install git://github.com/playgood/get_shorty.git
   
-Then in the model that you want to add a short url to 
+Then in the model that you want to add a short url to - this model must have a `short_url` column (this is the default but can be customised see options below)
 
-  Class ModelName
-    include GetShorty
-    has_short_url  
-  end
+    Class ModelName
+      include GetShorty
+      has_short_url  
+    end
     
 has_short_url by default relies on the [Bitly](http://bit.ly/ "Bitly") API to shorten urls   
-You need to register with Bitly to get a login and api_key. This needs to be set in a rails initializer to allow the Bitly provider to connect to your api account.
+You need to register with Bitly to get a login and api_key. 
+This needs to be set in a rails initializer to allow the Bitly provider to connect to your api account.
 
+In your initializer
+    
+    Bitly::Config.set do |config|
+      config.login = "my_bitly_login"
+      config.api_key = "BLAH_BLAH_BLAH"
+    end
+    
+or with a yaml file with the api_key and login keys. 
+
+  api_key: "R_150637558220e8a5b0c8c3ca90d58c65"
+  login: "my_bitly_login"
+
+    
+    Bitly::Config.set do |config|
+      config.config_file = File.join(Rails.root, "path/to/config/file")
+    end
+    
 Or
 
 You can roll out your own shortening provider - all it has to do is respond to the shorten method.
 This can then be set using has_short_url option :shortening_service
+
 For example:
-  `Class ModelName
-    include GetShorty
+    Class ModelName
+      include GetShorty
     
-    has_short_url :shortening_service => MyShortener
-  end`
+      has_short_url :shortening_service => MyShortener
+    end
   
 _This assumes you have defined a Class `MyShortener` which respond to the method `shorten` with the parameter url_
+
+## Integration
+
+  To try to keep the design of this plugin / gem clean and allow for future integration into more ruby frameworks there are no automatic hooks or callbacks to trigger the 
+  shortening service.
+  
+  You will have to add these yourself.
+  
+  For example in rails
+  
+    Class ModelName
+      include GetShorty
+      has_short_url
+      
+      after_create :set_short_url
+    end
+    
+  This allows you more flexibility than adding callbacks into the plugin. For example you may want to process the api calls to bitly out of process using delayed_job or something similar.
+  
+     
 ## Note on Patches/Pull Requests
  
 * Fork the project.

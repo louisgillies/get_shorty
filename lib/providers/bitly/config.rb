@@ -12,7 +12,7 @@ module Bitly
       def load_config()
          unless config_file.nil?
            api_details = YAML.load(File.open(config_file)).symbolize_keys 
-           @api_key, @login = api_details[:api_key], api_details[:username]
+           @api_key, @login = api_details[:api_key], api_details[:login]
          end
       end
 
