@@ -8,7 +8,7 @@ A plugin for rails that shortens a url using the bitly shortening service and pe
 ## Installation
 
 ### As a rails plugin
-  script/plugin install git://github.com/playgood/get_shorty.git
+    script/plugin install git://github.com/playgood/get_shorty.git
   
 Then in the model that you want to add a short url to - this model must have a `short_url` column (this is the default but can be customised see options below)
 
@@ -30,8 +30,9 @@ In your initializer
     
 or with a yaml file with the api_key and login keys. 
 
-  api_key: "R_150637558220e8a5b0c8c3ca90d58c65"
-  login: "my_bitly_login"
+    api_key: "BLAH_BLAH_BLAH"
+  
+    login: "my_bitly_login"
 
     
     Bitly::Config.set do |config|
@@ -51,6 +52,14 @@ For example:
     end
   
 _This assumes you have defined a Class `MyShortener` which respond to the method `shorten` with the parameter url_
+
+## Options
+
+`has_short_url` has the following options:
+*  `:shortening_service` - default is Bitly::Client.connection - you can create your own (it just needs to be an object that responds to `.shorten(url)`)
+*  `:short_url_method`  - default is :short_url (most commonly a db column - but not neccesarily)
+*  `:long_url_method`   - default is :generate_long_url - In a rails app this would probably be a resourceful route helper method for example page_url.
+*  `long_url_host`
 
 ## Integration
 
