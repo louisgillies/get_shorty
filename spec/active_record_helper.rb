@@ -12,6 +12,13 @@ end
 set_bitly_configuration
 
 class Post < ActiveRecord::Base
+  # to replicate rails url_writer
+  def self.default_url_options
+    {}
+  end
+  
   include GetShorty
   has_short_url
+  
+
 end

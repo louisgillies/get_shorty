@@ -53,14 +53,14 @@ For example:
   
 _This assumes you have defined a Class `MyShortener` which respond to the method `shorten` with the parameter url_
 
-## Options
+## Parameters &amp; Options
 
 `has_short_url` has the following options:
-
+* `long_url_host` - this is required so the rails url_helper method work. Takes a string or a hash with a value for each environment. 
 * `:shortening_service` - default is Bitly::Client.connection - you can create your own (it just needs to be an object that responds to `.shorten(url)`)
-* `:short_url_method`  - default is :short_url (most commonly a db column - but not neccesarily)
+* `:short_url_method`  - default is :short_url (most commonly a db column - but not necessarily)
 * `:long_url_method`   - default is :generate_long_url - In a rails app this would probably be a resourceful route helper method for example page_url.
-* `long_url_host` - this is needed so the rails url_helper method work. 
+
 
 ## Integration
 

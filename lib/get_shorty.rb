@@ -22,12 +22,16 @@ module GetShorty
       include ActionController::UrlWriter if defined?(ActionController )# non mvc - but need to know the url for model instance to persist the short_url.
       @short_url_options = {:long_url_method => :generate_long_url, :short_url_method => :short_url}.update(options) 
       @shortening_serivce = options[:shortener_service] || Bitly::Client.connection
-      @long_url_host = options[:long_url_host]
+      set_long_url_host options[:long_url_host]
     end
     
     # for Rails when using UrlWriter
-    def get_long_url_host
-      @long_url_host
+    def set_long_url_host(value)
+      self.default_url_options[:host] = if value.is_a?(Hash) && defined?(Rails)
+        value.stringify_keys[Rails.env]
+      else
+        value
+      end
     end
   end
 
@@ -56,7 +60,7 @@ module GetShorty
     # Goes against the MVC conventions (although we are generating this for the purpose of creating a short_url for the database so it is to do with the Model.)
     def generate_long_url()
       begin
-        send("#{self.class.name.downcase}_url", self, :host => self.class.get_long_url_host) unless self.new_record? # Can't generate the url until we have an id and title.
+        send("#{self.class.name.downcase}_url", self) unless self.new_record? # Can't generate the url until we have an id and title.
       end
     end
     
