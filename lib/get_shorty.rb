@@ -57,8 +57,6 @@ module GetShorty
     def generate_long_url()
       begin
         send("#{self.class.name.downcase}_url", self, :host => self.class.get_long_url_host) unless self.new_record? # Can't generate the url until we have an id and title.
-      rescue
-        raise "You must specify resource for #{self.class.name.downcase} in your routes.rb file."
       end
     end
     
