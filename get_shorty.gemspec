@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{get_shorty}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Louis Gillies"]
@@ -14,30 +14,17 @@ Gem::Specification.new do |s|
   s.email = %q{louisgillies@yahoo.co.uk}
   s.extra_rdoc_files = [
     "LICENSE",
-     "README.rdoc"
+     "README.md"
   ]
   s.files = [
-    ".document",
-     ".gitignore",
-     "HEAD",
+    ".gitignore",
      "LICENSE",
-     "README.rdoc",
+     "README.md",
      "Rakefile",
      "VERSION",
-     "config",
-     "description",
+     "get_shorty.gemspec",
      "get_shorty.rb",
-     "hooks/applypatch-msg.sample",
-     "hooks/commit-msg.sample",
-     "hooks/post-commit.sample",
-     "hooks/post-receive.sample",
-     "hooks/post-update.sample",
-     "hooks/pre-applypatch.sample",
-     "hooks/pre-commit.sample",
-     "hooks/pre-rebase.sample",
-     "hooks/prepare-commit-msg.sample",
-     "hooks/update.sample",
-     "info/exclude",
+     "init.rb",
      "lib/get_shorty.rb",
      "lib/providers/bitly.rb",
      "lib/providers/bitly/client.rb",
