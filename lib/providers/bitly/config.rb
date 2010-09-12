@@ -19,14 +19,14 @@ module Bitly
       def login
         return @login unless @login.nil?
         self.load_config
-        raise "Login must be defined" if @login.nil?
+        raise "Bitly Login must be defined" if @login.nil?
         @login
       end
 
       def api_key
         return @api_key unless @api_key.nil?
         self.load_config
-        raise "Api key must be defined" if @api_key.nil?
+        raise "Bitly Api key must be defined" if @api_key.nil?
         @api_key
       end
     end
